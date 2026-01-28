@@ -29,6 +29,6 @@ Enable Developer Mode (top right toggle).
 Click Load Unpacked.
 Select the focus-flow folder.
 Developed with ❤️ by javid-dotcom
-<img width="643" height="811" alt="image" src="https://github.com/user-attachments/assets/97097fb4-2be8-47ff-8633-38b70c5110af" />
-<img width="558" height="798" alt="image" src="https://github.com/user-attachments/assets/f7689dcb-c4b6-4012-badd-6c7a86d650a8" />
-<img width="703" height="222" alt="image" src="https://github.com/user-attachments/assets/62b3c3d5-cf33-4a79-ba79-02a8778c8927" />
+<img width="64" height="81" alt="image" src="https://github.com/user-attachments/assets/97097fb4-2be8-47ff-8633-38b70c5110af" />
+<img width="55" height="79" alt="image" src="https://github.com/user-attachments/assets/f7689dcb-c4b6-4012-badd-6c7a86d650a8" />
+<img width="70" height="22" alt="image" src="https://github.com/user-attachments/assets/62b3c3d5-cf33-4a79-ba79-02a8778c8927" />
