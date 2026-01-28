@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Focus Flow Pro - Analytics</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --subtext: #64748b;
+      --primary: #6366f1;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+    }
+
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 40px; transition: 0.3s; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+    
+    .card { background: var(--card); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px; }
+    
+    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+    
+    h1 { font-size: 28px; font-weight: 800; margin: 0; }
+    p { color: var(--subtext); }
+
+    .btn { 
+      background: var(--primary); color: white; border: none; padding: 10px 20px; 
+      border-radius: 10px; cursor: pointer; font-weight: 600; 
+    }
+
+    #themeToggle { background: var(--card); color: var(--text); border: 1px solid var(--subtext); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Analytics Dashboard</h1>
+        <p>Your productivity patterns for the last 30 days</p>
+      </div>
+      <button id="themeToggle" class="btn">Toggle Dark Mode</button>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Time Usage Trend</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="card">
+        <h3>Site Breakdown</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="chart.js"></script>
+  <script src="history.js"></script>
+</body>
+</html>

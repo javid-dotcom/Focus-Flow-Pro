@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Focus Flow Pro</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --dark-bar: #1e293b;
+    }
+
+    body { 
+      width: 360px; 
+      margin: 0; 
+      font-family: 'Inter', -apple-system, system-ui, sans-serif; 
+      background: var(--bg); 
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    /* Top Dashboard */
+    .dashboard { 
+      background: var(--primary); 
+      color: white; 
+      padding: 24px 20px; 
+      text-align: center; 
+      transition: background 0.4s ease;
+    }
+    .timer-display { 
+      font-size: 38px; 
+      font-weight: 800; 
+      margin: 4px 0; 
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -1px;
+    }
+    .status-text { 
+      font-size: 11px; 
+      opacity: 0.85; 
+      text-transform: uppercase; 
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+
+    /* Accountability & Grade Bar */
+    .stats-bar {
+      background: var(--dark-bar);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .grade-container { display: flex; align-items: center; gap: 8px; }
+    #prodGrade {
+      background: var(--success);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    #totalDailyTime {
+      color: #fb7185;
+      font-size: 12px;
+      background: rgba(251, 113, 133, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* Main Content Container */
+    .container { padding: 20px; }
+
+    /* Deep Work Section */
+    .toggle-section { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 14px; 
+      background: #fff1f2; 
+      border-radius: 12px; 
+      border: 1px solid #ffe4e6; 
+      margin-bottom: 24px;
+    }
+    .toggle-label { font-size: 13px; font-weight: 700; color: #be123c; }
+
+    /* Modern Toggle Switch */
+    .switch { position: relative; display: inline-block; width: 42px; height: 24px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { 
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; 
+      background-color: #cbd5e1; transition: .3s; border-radius: 34px; 
+    }
+    .slider:before { 
+      position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; 
+      background-color: white; transition: .3s; border-radius: 50%;
+    }
+    input:checked + .slider { background-color: var(--danger); }
+    input:checked + .slider:before { transform: translateX(18px); }
+
+    /* Form Elements */
+    .input-label { font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; display: block; text-transform: uppercase; }
+    input[type="text"] { 
+      width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; 
+      box-sizing: border-box; margin-bottom: 16px; outline: none; background: var(--surface);
+    }
+    .time-picker { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .time-unit input { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 10px; text-align: center; font-weight: 600; background: var(--surface); }
+    .time-unit span { font-size: 10px; color: var(--text-muted); display: block; text-align: center; margin-top: 6px; }
+
+    button#addBtn { 
+      width: 100%; padding: 14px; background: var(--text-main); color: white; 
+      border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 14px;
+    }
+
+    /* Rules List */
+    .rules-list { margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px; }
+    .rule-card { 
+      background: var(--surface); border-radius: 12px; padding: 14px; margin-bottom: 10px; 
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .rule-url { font-weight: 700; font-size: 14px; color: var(--text-main); }
+    .rule-time { font-size: 12px; color: var(--text-muted); }
+    .delete-btn { color: #94a3b8; cursor: pointer; font-size: 22px; font-weight: 300; line-height: 1; padding: 5px; }
+    .delete-btn:hover { color: var(--danger); }
+
+    /* Footer Tools */
+    .footer-tools {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px dashed var(--border);
+    }
+    #exportBtn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    #exportBtn:hover {
+      background: var(--surface);
+      color: var(--text-main);
+      border-color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Timer Dashboard -->
+  <div class="dashboard" id="dashboardBg">
+    <div class="status-text" id="statusLabel">Ready to Focus</div>
+    <div class="timer-display" id="timerDisplay">00:00:00</div>
+  </div>
+
+  <!-- Stats Bar with Grade -->
+  <div class="stats-bar">
+    <div class="grade-container">
+      <span id="prodGrade">A+</span>
+      <span>Daily Stats</span>
+    </div>
+    <span id="totalDailyTime">0s</span>
+  </div>
+
+  <div class="container">
+    
+    <!-- Deep Work Toggle -->
+    <div class="toggle-section">
+      <div class="toggle-label">Deep Work Mode 🔥</div>
+      <label class="switch">
+        <input type="checkbox" id="deepWorkToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Rule Inputs -->
+    <label class="input-label">Block New Website</label>
+    <input type="text" id="urlInput" placeholder="e.g. twitter.com" spellcheck="false">
+
+    <label class="input-label">Set Time Limit</label>
+    <div class="time-picker">
+      <div class="time-unit"><input type="number" id="hh" value="0" min="0"><span>Hrs</span></div>
+      <div class="time-unit"><input type="number" id="mm" value="5" min="0"><span>Min</span></div>
+      <div class="time-unit"><input type="number" id="ss" value="0" min="0"><span>Sec</span></div>
+    </div>
+
+    <button id="addBtn">Create Focus Rule</button>
+
+    <!-- List of Active Rules -->
+    <div class="rules-list" id="rulesList"></div>
+        <button id="viewHistory" style="background: var(--surface); color: var(--primary); border: 1px solid var(--primary); width: 100%; padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer; margin-top: 10px; margin-bottom: 5px;">
+    📊 View Analytics Dashboard
+    </button>
+
+    <!-- Professional Footer Tools -->
+    <div class="footer-tools">
+      <button id="exportBtn">
+        <span>📥</span> Export Focus Data (CSV)
+      </button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
